@@ -6,7 +6,7 @@
       <input placeholder="What needs to be done?" v-model.trim="strValue"
           class="newtodo" @keyup.enter="addNewtodo({content:strValue});
                                         clearValue();
-                                        displayArrows();">
+                                        displayArrows();Count()">
     </div>
     <div class="todoMain">
       <List />
@@ -23,7 +23,7 @@
 <script>
 import List from './list.vue'
 import Operation from './operation.vue'
-import {mapActions} from 'vuex'
+import {mapState, mapActions, mapGetters} from 'vuex'
 export default {
   //props 将数据从父组件传递到其他子组件
   //data 每个组件的内存,这是存储数据和希望跟踪的任何其他变量的地方
@@ -36,8 +36,13 @@ export default {
     return{
       msg:'todos', //标题
       strValue:'', //文本框值
-      arrowsExpend: false  //箭头
+      arrowsExpend: false,  //箭头
     }
+  },
+  computed:{
+    ...mapGetters({
+      contentIndex:'getContentCount'
+    }),
   },
   methods:{
     ...mapActions({
@@ -48,6 +53,10 @@ export default {
     },
     displayArrows(){
       document.querySelector(".todoSet strong").style.display = "block";
+    },
+    Count(){
+      console.log(this.contentIndex);  //undefined
+      console.log(this.$store.state.contentCount);  //1
     }
   }
 }

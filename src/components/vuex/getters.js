@@ -1,5 +1,8 @@
 export default{
     getContentItem(state){
-        return state.contentItem
+      return state.contentItem
+    },
+    getContentCount(state){
+      return state.contentCount
     }
 }
