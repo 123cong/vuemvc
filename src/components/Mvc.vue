@@ -3,7 +3,10 @@
     <h1>{{ msg }}</h1>
     <div class="todoSet">
       <strong>╲╱</strong>
-      <input placeholder="What needs to be done?" v-model="strValue"  class="newtodo" @keyup.enter="addNewtodo({content:this.strValue})">
+      <input placeholder="What needs to be done?" v-model.trim="strValue"
+          class="newtodo" @keyup.enter="addNewtodo({content:strValue});
+                                        clearValue();
+                                        displayArrows();">
     </div>
     <div class="todoMain">
       <List />
@@ -31,16 +34,20 @@ export default {
   },
   data(){
     return{
-      msg:'todos',
-      strValue:''
+      msg:'todos', //标题
+      strValue:'', //文本框值
+      arrowsExpend: false  //箭头
     }
   },
   methods:{
     ...mapActions({
       addNewtodo:'syncAddContentItem'
     }),
-    login(){
-      console.log(this.strValue)
+    clearValue(){
+      this.strValue = '';
+    },
+    displayArrows(){
+      document.querySelector(".todoSet strong").style.display = "block";
     }
   }
 }
@@ -117,6 +124,7 @@ input::-webkit-input-placeholder{
   top: 20.5%;
   z-index: 2;
   display: none;
+  cursor: pointer;
 }
 .todoapp h1{
   position: absolute;

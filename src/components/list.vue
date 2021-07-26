@@ -1,19 +1,11 @@
 <template>
   <div>
+    <div v-for="(item,index) in contentItem" :key="index">
       <div class="mvc-list">
         <Icon :type="isExpand?'checked':'notChecked'" class="icon-checked"></Icon>
-        <label>11111111111</label>
+        <label>{{item.content}}</label>
         <button class="remove-label">×</button>
-    </div>
-    <div class="mvc-list">
-        <Icon :type="isExpand?'checked':'notChecked'" class="icon-checked"></Icon>
-        <label>2222222222</label>
-        <button class="remove-label">×</button>
-    </div>
-    <div class="mvc-list">
-        <Icon :type="isExpand?'checked':'notChecked'" class="icon-checked"></Icon>
-        <label>3333333333</label>
-        <button class="remove-label">×</button>
+      </div>
     </div>
   </div>
 
@@ -21,10 +13,22 @@
 
 <script>
 import Icon from './icon/Icon.vue'
+import {mapGetters} from 'vuex'
 export default {
     components:{
         Icon
     },
+    computed:{
+      ...mapGetters({
+        contentItem:'getContentItem'
+      })
+    },
+    data(){
+      return{
+        isExpand:true
+      }
+    }
+
 }
 </script>
 
