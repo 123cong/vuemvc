@@ -2,9 +2,10 @@
   <div>
     <div>
       <div class="mvc-list" v-for="(item,index) in contentItem" :key="index">
-        <Icon :type="isExpand?'checked':'notChecked'" class="icon-checked"></Icon>
+        <Icon :type="isExpand?'checked':'notChecked'" class="icon-checked" @checkedOneItem="checkedOneItem({content:item.content})"></Icon>
         <label class="label-content">{{item.content}}</label>
-        <button class="remove-label"  @click="removeTarget(item.content);">×</button>
+        <button class="remove-label"  @click="removeTarget({content:item.content});
+                                              displayNone()">×</button>
       </div>
     </div>
   </div>
@@ -20,7 +21,7 @@ export default {
     computed:{
       ...mapGetters({
         contentItem:'getContentItem'
-      })
+      }),
     },
     data(){
       return{
@@ -31,11 +32,21 @@ export default {
       ...mapActions({
         removeTarget:'syncRemoveOneItem'
       }),
-      /**removeTarget(event){
-        var ev = event.currentTarget.parentElement;
-        //this.$delete(ev)
-        console.log(ev.innerHTML);
-      }*/
+      //调用父组件（数量为0不显示操作栏）
+      displayNone(){
+        this.$emit('displayBlock')
+      },
+      //全选/反选
+      checkedAll(){
+        if(this.isExpand==true){
+          this.isExpand = false
+        }else{
+          this.isExpand = true
+        }
+      },
+      checkedOneItem(content){
+        alert(content)
+      }
     }
 }
 </script>

@@ -6,7 +6,8 @@
           <li><a href="#">Active</a></li>
           <li><a href="#">Completed</a></li>
       </ul>
-      <button class="clear-completed">Clear completed</button>
+      <button class="clear-completed" @click="clearCompleted();
+                                              displayNone()">Clear completed</button>
   </div>
 </template>
 
@@ -18,6 +19,15 @@ export default {
       contentIndex:'getContentCount'
     }),
   },
+  methods:{
+    ...mapActions({
+      clearCompleted:'syncClearAllItem'
+    }),
+    //调用父组件（数量为0不显示操作栏）
+    displayNone(){
+      this.$emit('displayBlock')
+    }
+  }
 }
 </script>
 

@@ -2,15 +2,15 @@
   <div class="todoapp">
     <h1>{{ msg }}</h1>
     <div class="todoSet">
-      <strong>╲╱</strong>
+      <strong @click="checkedItem">╲╱</strong>
       <input placeholder="What needs to be done?" v-model.trim="strValue"
           class="newtodo" @keyup.enter="addNewtodo({content:strValue});
                                         clearValue();
                                         displayBlock();">
     </div>
     <div class="todoMain">
-      <List class="main-list" />
-      <Operation class="main-operation" />
+      <List class="main-list" @displayBlock="displayBlock" ref="list" />
+      <Operation class="main-operation" @displayBlock="displayBlock" />
     </div>
     <div class="todoInfo">
       <p>Double-click to edit a todo</p>
@@ -55,8 +55,15 @@ export default {
       if(this.contentIndex!=0){
         document.querySelector(".todoSet strong").style.display = "block";
         document.querySelector(".main-operation").style.display = "block";
+      }else{
+        document.querySelector(".todoSet strong").style.display = "none";
+        document.querySelector(".main-operation").style.display = "none";
       }
     },
+    //调用子组件（全选/反选）
+    checkedItem(){
+      this.$refs.list.checkedAll();
+    }
   }
 }
 </script>
