@@ -6,11 +6,11 @@
       <input placeholder="What needs to be done?" v-model.trim="strValue"
           class="newtodo" @keyup.enter="addNewtodo({content:strValue});
                                         clearValue();
-                                        displayArrows();Count()">
+                                        displayBlock();">
     </div>
     <div class="todoMain">
-      <List />
-      <Operation />
+      <List class="main-list" />
+      <Operation class="main-operation" />
     </div>
     <div class="todoInfo">
       <p>Double-click to edit a todo</p>
@@ -36,7 +36,6 @@ export default {
     return{
       msg:'todos', //标题
       strValue:'', //文本框值
-      arrowsExpend: false,  //箭头
     }
   },
   computed:{
@@ -51,13 +50,13 @@ export default {
     clearValue(){
       this.strValue = '';
     },
-    displayArrows(){
-      document.querySelector(".todoSet strong").style.display = "block";
+    displayBlock(){
+      //通过数据量判断，0不显示全选箭头、排序
+      if(this.contentIndex!=0){
+        document.querySelector(".todoSet strong").style.display = "block";
+        document.querySelector(".main-operation").style.display = "block";
+      }
     },
-    Count(){
-      console.log(this.contentIndex);  //undefined
-      console.log(this.$store.state.contentCount);  //1
-    }
   }
 }
 </script>
@@ -147,5 +146,8 @@ input::-webkit-input-placeholder{
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   display: block;
+}
+.main-operation{
+  display:none;
 }
 </style>

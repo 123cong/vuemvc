@@ -1,6 +1,6 @@
 <template>
   <div class="mvc-operation">
-      <span class="operation-item"><strong>2</strong> item left</span>
+      <span class="operation-item"><strong>{{this.contentIndex}}</strong> item left</span>
       <ul class="operation-ul">
           <li><a href="#">All</a></li>
           <li><a href="#">Active</a></li>
@@ -11,8 +11,13 @@
 </template>
 
 <script>
+import {mapState, mapActions, mapGetters} from 'vuex'
 export default {
-
+  computed:{
+    ...mapGetters({
+      contentIndex:'getContentCount'
+    }),
+  },
 }
 </script>
 

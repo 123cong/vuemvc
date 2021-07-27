@@ -1,19 +1,18 @@
 <template>
   <div>
-    <div v-for="(item,index) in contentItem" :key="index">
-      <div class="mvc-list">
+    <div>
+      <div class="mvc-list" v-for="(item,index) in contentItem" :key="index">
         <Icon :type="isExpand?'checked':'notChecked'" class="icon-checked"></Icon>
-        <label>{{item.content}}</label>
-        <button class="remove-label">×</button>
+        <label class="label-content">{{item.content}}</label>
+        <button class="remove-label"  @click="removeTarget(item.content);">×</button>
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
 import Icon from './icon/Icon.vue'
-import {mapGetters} from 'vuex'
+import {mapGetters,mapActions} from 'vuex'
 export default {
     components:{
         Icon
@@ -27,8 +26,17 @@ export default {
       return{
         isExpand:true
       }
+    },
+    methods:{
+      ...mapActions({
+        removeTarget:'syncRemoveOneItem'
+      }),
+      /**removeTarget(event){
+        var ev = event.currentTarget.parentElement;
+        //this.$delete(ev)
+        console.log(ev.innerHTML);
+      }*/
     }
-
 }
 </script>
 

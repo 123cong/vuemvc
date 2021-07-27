@@ -1,6 +1,6 @@
 <template>
-  <svg class="icon" aria-hidden="true">
-    <use :href="iconClass" ></use>
+  <svg class="icon" aria-hidden="true" @click="checkedItem($event)">
+    <use :href="iconClass"></use>
   </svg>
 </template>
 
@@ -24,6 +24,11 @@ export default {
         iconClass(){
             return map[this.type];
         }
+    },
+    methods:{
+      checkedItem(event){
+        alert(event.target);
+      }
     }
 }
 </script>
