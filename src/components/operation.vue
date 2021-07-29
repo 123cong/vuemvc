@@ -2,9 +2,9 @@
   <div class="mvc-operation">
       <span class="operation-item"><strong>{{this.contentIndex}}</strong> item left</span>
       <ul class="operation-ul">
-          <li><a href="#">All</a></li>
-          <li><a href="#">Active</a></li>
-          <li><a href="#">Completed</a></li>
+          <li><a href="#" @click="filterData('All')">All</a></li>
+          <li><a href="#" @click="filterData('Active')">Active</a></li>
+          <li><a href="#" @click="filterData('Completed')">Completed</a></li>
       </ul>
       <button class="clear-completed" @click="clearCompleted();
                                               displayNone()">Clear completed</button>
@@ -16,17 +16,20 @@ import {mapState, mapActions, mapGetters} from 'vuex'
 export default {
   computed:{
     ...mapGetters({
-      contentIndex:'getContentCount'
+      contentIndex:'getContentCount',
     }),
   },
   methods:{
     ...mapActions({
       clearCompleted:'syncClearAllItem'
     }),
+    ...mapActions({
+      filterData:'syncFilerItem'
+    }),
     //调用父组件（数量为0不显示操作栏）
     displayNone(){
       this.$emit('displayBlock')
-    }
+    },
   }
 }
 </script>

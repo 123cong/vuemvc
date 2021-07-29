@@ -7,5 +7,8 @@ export default{
     },
     syncClearAllItem(context){
       context.commit('clearAllItem')
+    },
+    syncFilerItem(context,data){
+      context.commit('filterItem',data)
     }
 }

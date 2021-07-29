@@ -2,8 +2,8 @@
   <div>
     <div>
       <div class="mvc-list" v-for="(item,index) in contentItem" :key="index">
-        <Icon :type="isExpand?'checked':'notChecked'" class="icon-checked" @checkedOneItem="checkedOneItem({content:item.content})"></Icon>
-        <label class="label-content">{{item.content}}</label>
+        <Icon :type="item.isExpand?'notChecked':'checked'" class="icon-checked" @click="item.isExpand=!item.isExpand" ></Icon>
+        <label class="label-content">{{item.content.content}}</label>
         <button class="remove-label"  @click="removeTarget({content:item.content});
                                               displayNone()">×</button>
       </div>
@@ -18,15 +18,15 @@ export default {
     components:{
         Icon
     },
-    computed:{
-      ...mapGetters({
-        contentItem:'getContentItem'
-      }),
-    },
     data(){
       return{
         isExpand:true
       }
+    },
+    computed:{
+      ...mapGetters({
+        contentItem:'getContentItem'
+      }),
     },
     methods:{
       ...mapActions({
@@ -44,8 +44,8 @@ export default {
           this.isExpand = true
         }
       },
-      checkedOneItem(content){
-        alert(content)
+      checkedOneItem(event){
+        event.currentTarget.getAttributeNode('class');
       }
     }
 }

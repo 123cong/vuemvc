@@ -1,5 +1,5 @@
 <template>
-  <svg class="icon" aria-hidden="true" @click="checkedOne(content)">
+  <svg class="icon" aria-hidden="true" @click="checkedOne($event)">
     <use :href="iconClass"></use>
   </svg>
 </template>
@@ -26,8 +26,8 @@ export default {
         }
     },
     methods:{
-      checkedOne(){
-        this.$emit('checkedOneItem')
+      checkedOne(event){
+        this.$emit('checkedOneItem',event)
       }
     }
 }

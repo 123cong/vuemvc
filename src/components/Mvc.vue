@@ -9,7 +9,10 @@
                                         displayBlock();">
     </div>
     <div class="todoMain">
-      <List class="main-list" @displayBlock="displayBlock" ref="list" />
+      <keep-alive>
+        <router-view></router-view>
+        <List class="main-list" @displayBlock="displayBlock" ref="list" />
+      </keep-alive>
       <Operation class="main-operation" @displayBlock="displayBlock" />
     </div>
     <div class="todoInfo">
@@ -63,7 +66,7 @@ export default {
     //调用子组件（全选/反选）
     checkedItem(){
       this.$refs.list.checkedAll();
-    }
+    },
   }
 }
 </script>
