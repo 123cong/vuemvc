@@ -1,10 +1,10 @@
 <template>
   <div class="mvc-operation">
-      <span class="operation-item"><strong>{{this.contentIndex}}</strong> item left</span>
+      <span class="operation-item"><strong>{{this.contentItem.length}}</strong> item left</span>
       <ul class="operation-ul">
-          <li><a href="#" @click="filterData('All')">All</a></li>
-          <li><a href="#" @click="filterData('Active')">Active</a></li>
-          <li><a href="#" @click="filterData('Completed')">Completed</a></li>
+          <li><a href="#" @click="showData('all')">All</a></li>
+          <li><a href="#" @click="showData('active')">Active</a></li>
+          <li><a href="#" @click="showData('completed')">Completed</a></li>
       </ul>
       <button class="clear-completed" @click="clearCompleted();
                                               displayNone()">Clear completed</button>
@@ -16,20 +16,33 @@ import {mapState, mapActions, mapGetters} from 'vuex'
 export default {
   computed:{
     ...mapGetters({
-      contentIndex:'getContentCount',
+      contentItem:'getContentItem',
+      basicData:'getAllData'
     }),
   },
   methods:{
     ...mapActions({
-      clearCompleted:'syncClearAllItem'
-    }),
-    ...mapActions({
-      filterData:'syncFilerItem'
+      clearCompleted:'syncClearAllItem',
+      setShowData: 'syncSetData'
     }),
     //调用父组件（数量为0不显示操作栏）
     displayNone(){
       this.$emit('displayBlock')
     },
+    showData(type){
+      let data = []
+      switch(type){
+        case 'all':
+          data = this.basicData;
+          break;
+        case 'active':
+          data = this.basicData.filter(item => !item.isExpand);
+          break;
+        case 'completed':
+          data = this.basicData.filter(item => item.isExpand);
+      }
+      this.setShowData(data)
+    }
   }
 }
 </script>

@@ -1,4 +1,4 @@
 export default{
-    contentItem:[],  //存放添加的数据
-    contentCount:0, //数据总和
+    basicData: [],  // 基础数据
+    contentItem:[],  //展示数据
 }

@@ -8,7 +8,7 @@ export default{
     syncClearAllItem(context){
       context.commit('clearAllItem')
     },
-    syncFilerItem(context,data){
-      context.commit('filterItem',data)
+    syncSetData(context,data){
+      context.commit('setDesignData',data)
     }
 }

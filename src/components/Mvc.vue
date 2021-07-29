@@ -4,7 +4,7 @@
     <div class="todoSet">
       <strong @click="checkedItem">╲╱</strong>
       <input placeholder="What needs to be done?" v-model.trim="strValue"
-          class="newtodo" @keyup.enter="addNewtodo({content:strValue});
+          class="newtodo" @keyup.enter="addNewtodo({content:strValue,isExpand:false});
                                         clearValue();
                                         displayBlock();">
     </div>
@@ -43,7 +43,7 @@ export default {
   },
   computed:{
     ...mapGetters({
-      contentIndex:'getContentCount'
+      contentItem:'getContentItem'
     }),
   },
   methods:{

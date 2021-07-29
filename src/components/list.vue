@@ -2,8 +2,8 @@
   <div>
     <div>
       <div class="mvc-list" v-for="(item,index) in contentItem" :key="index">
-        <Icon :type="item.isExpand?'notChecked':'checked'" class="icon-checked" @click="item.isExpand=!item.isExpand" ></Icon>
-        <label class="label-content">{{item.content.content}}</label>
+        <Icon :type="item.isExpand?'notChecked':'checked'" class="icon-checked" @click.native="item.isExpand=!item.isExpand" ></Icon>
+        <label class="label-content">{{item.content}}</label>
         <button class="remove-label"  @click="removeTarget({content:item.content});
                                               displayNone()">×</button>
       </div>
@@ -44,9 +44,6 @@ export default {
           this.isExpand = true
         }
       },
-      checkedOneItem(event){
-        event.currentTarget.getAttributeNode('class');
-      }
     }
 }
 </script>

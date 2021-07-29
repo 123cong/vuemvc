@@ -2,7 +2,7 @@ export default{
     getContentItem(state){
       return state.contentItem
     },
-    getContentCount(state){
-      return state.contentCount
+    getAllData(state){
+      return state.basicData
     }
 }

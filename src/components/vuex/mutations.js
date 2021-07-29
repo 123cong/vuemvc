@@ -3,7 +3,8 @@ export default{
         //为空不添加
         if(content.content){
           //计算添加数量
-          state.contentItem.push({content:content,isExpand:false})
+          state.contentItem.push(content)
+          state.basicData.push(content)
           state.contentCount = state.contentItem.length
         }
     },
@@ -16,17 +17,10 @@ export default{
     clearAllItem(state){
       //清空列表
       state.contentItem = []
-      state.contentCount = 0
+      state.basicData = []
     },
-    filterItem(state,data){
-      if(data=='All'){
-        state.contentItem
-      }else if(data=='Active'){
-        newData = data.filter(item=> item.isExpand===true)
-        state.contentItem = newData
-      }else if(data=='Completed'){
-        newData = data.filter(item=> item.isExpand===false)
-        state.contentItem = newData
-      }
+    //筛选
+    setDesignData(state,data){
+      state.contentItem = data
     }
 }
